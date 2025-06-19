@@ -9,5 +9,3 @@ scipy
 matplotlib
 grad-cam
 plotly
-transformers
-datasets
