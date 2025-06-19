@@ -1,0 +1,13 @@
+streamlit
+onnxruntime
+torch
+torchvision
+numpy
+pillow
+opencv-python
+scipy
+matplotlib
+grad-cam
+plotly
+transformers
+datasets

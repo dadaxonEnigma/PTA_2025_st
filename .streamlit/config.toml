@@ -1,0 +1,19 @@
+[server]
+port = 8501
+enableCORS = false
+maxUploadSize = 100
+
+[theme]
+base = "light"  
+primaryColor = "#4CAF50"  
+backgroundColor = "#F5F5F5"  
+textColor = "#000000" 
+
+[runner]
+
+
+[browser]
+gatherUsageStats = false  
+
+[client]
+displayEnabled = true  
