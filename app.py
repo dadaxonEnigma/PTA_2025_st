@@ -176,7 +176,21 @@ def get_heatmap(image, model, target_class):
     except Exception as e:
         st.error(f"GradCAM ошибка: {e}")
         return None
+    
+def get_filtered_map(image):
+    """Градиент + усиление контраста + яркость"""
+    img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+    edges = cv2.Sobel(img_gray, ddepth=cv2.CV_64F, dx=1, dy=1, ksize=5)
 
+    edges_abs = np.absolute(edges)
+    edges_norm = (255 * (edges_abs / np.max(edges_abs))).astype(np.uint8)
+    colored = cv2.applyColorMap(edges_norm, cv2.COLORMAP_MAGMA)  # Можно 'JET', 'PLASMA', 'HOT'
+    
+    # Усиливаем контраст и яркость
+    enhanced = cv2.convertScaleAbs(colored, alpha=1.6, beta=30)
+    enhanced = cv2.cvtColor(enhanced, cv2.COLOR_BGR2RGB)
+    
+    return Image.fromarray(enhanced)
 def format_class_name(class_name):
     return class_name.replace("___", " — ").replace("_", " ").title()
 
@@ -258,7 +272,12 @@ if uploaded_file:
         progress_bar.empty()
         
         # Визуализации
-        tab1, tab2, tab3 = st.tabs(["📈 График вероятностей", "🌡️ Тепловая карта", "📋 Полные данные"])
+        tab1, tab2, tab3, tab4 = st.tabs([
+    "📈 График вероятностей", 
+    "🌡️ Тепловая карта",
+    "🧪 Частотная карта",
+    "📋 Полные данные"
+])
         
         with tab1:
             fig, ax = plt.subplots(figsize=(10, 6))
@@ -301,8 +320,22 @@ if uploaded_file:
                             file_name="heatmap.jpg",
                             mime="image/jpeg"
                         )
-        
         with tab3:
+            if st.button("Создать частотную карту"):
+                with st.spinner("Обработка изображения..."):
+                    filtered_img = get_filtered_map(img)
+                    st.image(filtered_img, caption="Карта градиентов (частотных изменений)", use_container_width=True)
+                    
+                    buf = io.BytesIO()
+                    filtered_img.save(buf, format="JPEG")
+                    st.download_button(
+                        label="Скачать частотную карту",
+                        data=buf.getvalue(),
+                        file_name="frequency_map.jpg",
+                        mime="image/jpeg"
+                    )
+                
+        with tab4:
             st.json({
                 "diagnosis": format_class_name(pred_class),
                 "probability": f"{probs[top_idx[0]]*100:.2f}%",
