@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # Проверка и импорт Grad-CAM
 try:
-    from pytorch_grad_cam import GradCAM
+    from pytorch_grad_cam import GradCAMPlusPlus
     from pytorch_grad_cam.utils.image import show_cam_on_image
     from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
     GRADCAM_AVAILABLE = True
@@ -91,7 +91,7 @@ def get_heatmap(image, model, target_class):
         img = np.array(image).astype(np.float32) / 255.0
         input_tensor = preprocess(image).unsqueeze(0).to(device)
         target_layers = [model.layer4[-1]]
-        cam = GradCAM(model=model, target_layers=target_layers)
+        cam = GradCAMPlusPlus(model=model, target_layers=target_layers)
         targets = [ClassifierOutputTarget(target_class)]
         cam_mask = cam(input_tensor=input_tensor, targets=targets)[0]
         cam_mask_resized = cv2.resize(cam_mask, (img.shape[1], img.shape[0]))
