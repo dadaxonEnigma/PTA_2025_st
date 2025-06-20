@@ -14,7 +14,10 @@ import json
 import time
 
 
-
+api_key = st.secrets["API_KEY"]
+if not api_key:
+    st.error("API ключ не найден.")
+    st.stop()
 # Инициализация состояния языка
 if 'language' not in st.session_state:
     st.session_state.language = "uz"
@@ -271,7 +274,7 @@ if uploaded_file:
                     f"({probs[top_idx[0]]*100:.1f}%). "
                     f"Tavsiya etilgan davolash: {treatment[pred_class].get('treatment', treatment[pred_class].get('recommendation', get_text('no_treatment')))}"
                 )
-                api_key = "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"
+                api_key = st.secrets["API_KEY"]
                 bot_response = query_deepseek(user_input, api_key, context)
 
                 st.session_state.chat_history.append({
