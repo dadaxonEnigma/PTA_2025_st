@@ -9,3 +9,6 @@ scipy
 matplotlib
 grad-cam
 plotly
+sentence-transformers
+faiss-cpu
+duckduckgo_search
