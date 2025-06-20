@@ -34,7 +34,7 @@ translations = {
         "treatment_schedule_title": "{month} uchun tavsiyalar",
         "weather_advice_expander": "⛅ Ob-havo bo‘yicha tavsiyalar",
         "visualization_tabs": [
-            "📈 Ehtimollik grafigi",
+            "Ehtimollik grafigi",
             "🌡️ Issiqlik xaritasi",
             "🧪 Chastota xaritasi",
             "📋 To‘liq ma’lumot",
@@ -97,7 +97,7 @@ Tavsiyalar:
         "treatment_schedule_title": "Recommendations for {month}",
         "weather_advice_expander": "⛅ Weather Advice",
         "visualization_tabs": [
-            "📈 Probability Graph",
+            " Probability Graph",
             "🌡️ Heatmap",
             "🧪 Frequency Map",
             "📋 Full Report",
@@ -160,7 +160,7 @@ Recommendations:
         "treatment_schedule_title": "Рекомендации для {month}",
         "weather_advice_expander": "⛅ Советы по погоде",
         "visualization_tabs": [
-            "📈 График вероятностей",
+            "График вероятностей",
             "🌡️ Тепловая карта",
             "🧪 Частотная карта",
             "📋 Полный отчёт",

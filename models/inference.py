@@ -10,12 +10,15 @@ import config
 import os
 
 def load_models():
+    print(f"ONNX Path: {config.MODEL_PATH_ONNX}, Exists: {os.path.exists(config.MODEL_PATH_ONNX)}")
+    print(f"PTH Path: {config.MODEL_PATH_PTH}, Exists: {os.path.exists(config.MODEL_PATH_PTH)}")
     if not os.path.exists(config.MODEL_PATH_ONNX) or not os.path.exists(config.MODEL_PATH_PTH):
         raise FileNotFoundError("Model topilmadi. Model fayllari yo‘lini tekshiring.")
     
     session = ort.InferenceSession(config.MODEL_PATH_ONNX)
+    print(f"ONNX Input: {session.get_inputs()[0].name}, Output: {session.get_outputs()[0].name}")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = models.resnet18(pretrained=False)
+    model = models.resnet18(weights='DEFAULT')
     model.fc = nn.Linear(model.fc.in_features, 8)
     model.load_state_dict(torch.load(config.MODEL_PATH_PTH, map_location=device))
     model = model.to(device).eval()

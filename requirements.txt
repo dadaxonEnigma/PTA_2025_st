@@ -8,7 +8,4 @@ opencv-python-headless>=4.5.0
 scipy
 matplotlib
 grad-cam
-plotly
-sentence-transformers
-faiss-cpu
 duckduckgo_search
