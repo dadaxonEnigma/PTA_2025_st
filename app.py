@@ -3,8 +3,7 @@ from PIL import Image
 from datetime import datetime
 from models.inference import load_models, predict_disease
 from models.visualization import get_heatmap, get_filtered_map, plot_probabilities
-from chatbot.knowledge_base import get_chat_answer
-from chatbot.search import web_search
+from web_search.search import web_search
 from data.treatments import get_treatment
 from data.classes import classes
 from data.translations import translations, class_name_translations, sidebar_content
@@ -208,10 +207,6 @@ if uploaded_file:
         submitted = st.form_submit_button(get_text("chat_submit_button"))
         if submitted and user_input.strip():
             with st.spinner(get_text("chat_processing")):
-                response = get_chat_answer(user_input)
-                st.success(f"### {get_text('chat_submit_button')}: {response['answer']}")
-                if response['context']:
-                    st.markdown(f"{get_text('chat_context_label')}: {response['context']}")
                 web_results = web_search(f"{user_input} o‘simlik kasalligi")
                 if web_results and "error" not in web_results[0]:
                     for result in web_results:
