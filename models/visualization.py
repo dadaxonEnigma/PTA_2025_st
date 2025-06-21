@@ -35,15 +35,27 @@ def get_heatmap(image, model, target_class):
         st.error(f"GradCAM xatosi: {e}")
         return None
 
-def get_filtered_map(image):
-    img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
-    edges = cv2.Sobel(img_gray, ddepth=cv2.CV_64F, dx=1, dy=1, ksize=5)
-    edges_abs = np.absolute(edges)
-    edges_norm = (255 * (edges_abs / np.max(edges_abs))).astype(np.uint8)
-    colored = cv2.applyColorMap(edges_norm, cv2.COLORMAP_MAGMA)
-    enhanced = cv2.convertScaleAbs(colored, alpha=1.6, beta=30)
-    enhanced = cv2.cvtColor(enhanced, cv2.COLOR_BGR2RGB)
-    return Image.fromarray(enhanced)
+def get_filtered_map(image, filter_type='sobel'):
+    img_np = np.array(image)
+    if filter_type == 'sobel':
+        img_gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
+        edges = cv2.Sobel(img_gray, ddepth=cv2.CV_64F, dx=1, dy=1, ksize=5)
+        edges_abs = np.absolute(edges)
+        edges_norm = (255 * (edges_abs / np.max(edges_abs))).astype(np.uint8)
+        colored = cv2.applyColorMap(edges_norm, cv2.COLORMAP_MAGMA)
+        enhanced = cv2.convertScaleAbs(colored, alpha=1.6, beta=30)
+        enhanced = cv2.cvtColor(enhanced, cv2.COLOR_BGR2RGB)
+        return Image.fromarray(enhanced)
+    elif filter_type == 'gray':
+        gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
+        return Image.fromarray(gray)
+    elif filter_type == 'canny':
+        gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
+        edges = cv2.Canny(gray, 100, 200)
+        return Image.fromarray(edges)
+    else:
+        # Возвращаем исходное изображение, если фильтр неизвестен
+        return image
 
 def plot_probabilities(probs, classes, top_idx):
     lang = st.session_state.get('language', 'uz')
