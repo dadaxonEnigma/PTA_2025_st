@@ -9,4 +9,4 @@ scipy
 matplotlib
 grad-cam
 duckduckgo_search
-python-weather==0.6.0
+python-weather
