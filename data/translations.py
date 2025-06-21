@@ -20,6 +20,15 @@ translations = {
         "chat_processing": "Javob qidirilmoqda...",
         "chat_context_label": "📖 Kontekst",
         "chat_web_error": "Internetdan ma’lumot topib bo‘lmadi",
+        "disease_gallery_header": "Kasalliklar galereyasi",
+        "select_plant": "O‘simlikni tanlang",
+        "select_disease": "Kasallikni tanlang",
+        "select_disease_btn": "Tanlash",
+        "disease_info_header": "Tanlangan kasallik haqida ma'lumot",
+        "get_advice_btn": "Maslahat olish",
+        "plant": "O‘simlik",
+        "diagnosed_disease": "Tashxis qo‘yilgan kasallik",
+        "treatment_search": "Davolash bo‘yicha ma'lumot",
         "usage_guide": """
 ### Ilovadan qanday foydalanish kerak?
 1. Zararlangan o‘simlik bargini bir xil fonda suratga oling
@@ -37,7 +46,6 @@ translations = {
             "Ehtimollik grafigi",
             "🌡️ Issiqlik xaritasi",
             "🧪 Chastota xaritasi",
-            "📋 To‘liq ma’lumot",
             "🌐 Internetdan qidirish"
         ],
         "download_graph": "Grafikni yuklab olish",
@@ -47,7 +55,6 @@ translations = {
         "generate_freq_map": "Chastota xaritasini yaratish",
         "freq_map_caption": "Chastota xaritasi (o‘zgarishlar ko‘rsatilgan)",
         "download_freq_map": "Chastota xaritasini yuklab olish",
-        "full_report_label": "To‘liq hisobotni yuklab olish",
         "web_search_label": "Internetdan ma’lumot topish",
         "web_search_header": "🌐 Internetdan qidirish natijalari",
         "no_treatment": "Tavsiyalar mavjud emas",
@@ -83,6 +90,15 @@ Tavsiyalar:
         "chat_processing": "Searching for an answer...",
         "chat_context_label": "📖 Context",
         "chat_web_error": "Could not find information on the internet",
+        "disease_gallery_header": "Disease Gallery",
+        "select_plant": "Select Plant",
+        "select_disease": "Select Disease",
+        "select_disease_btn": "Select",
+        "disease_info_header": "Selected Disease Information",
+        "get_advice_btn": "Get Advice",
+        "plant": "Plant",
+        "diagnosed_disease": "Diagnosed Disease",
+        "treatment_search": "Treatment Information",
         "usage_guide": """
 ### How to use the app?
 1. Take a photo of the affected plant leaf against a plain background
@@ -100,7 +116,6 @@ Tavsiyalar:
             " Probability Graph",
             "🌡️ Heatmap",
             "🧪 Frequency Map",
-            "📋 Full Report",
             "🌐 Web Search"
         ],
         "download_graph": "Download Graph",
@@ -110,7 +125,6 @@ Tavsiyalar:
         "generate_freq_map": "Generate Frequency Map",
         "freq_map_caption": "Frequency Map (shows highlighted changes)",
         "download_freq_map": "Download Frequency Map",
-        "full_report_label": "Download Full Report",
         "web_search_label": "Search the Internet",
         "web_search_header": "🌐 Web Search Results",
         "no_treatment": "No recommendations available",
@@ -146,6 +160,15 @@ Recommendations:
         "chat_processing": "Поиск ответа...",
         "chat_context_label": "📖 Контекст",
         "chat_web_error": "Не удалось найти информацию в интернете",
+        "disease_gallery_header": "Галерея болезней",
+        "select_plant": "Выберите растение",
+        "select_disease": "Выберите болезнь",
+        "select_disease_btn": "Выбрать",
+        "disease_info_header": "Информация о выбранной болезни",
+        "get_advice_btn": "Получить совет",
+        "plant": "Растение",
+        "diagnosed_disease": "Диагностированная болезнь",
+        "treatment_search": "Информация о лечении",
         "usage_guide": """
 ### Как использовать приложение?
 1. Сфотографируйте поражённый лист растения на однотонном фоне
@@ -163,7 +186,6 @@ Recommendations:
             "График вероятностей",
             "🌡️ Тепловая карта",
             "🧪 Частотная карта",
-            "📋 Полный отчёт",
             "🌐 Поиск в интернете"
         ],
         "download_graph": "Скачать график",
@@ -173,7 +195,6 @@ Recommendations:
         "generate_freq_map": "Создать частотную карту",
         "freq_map_caption": "Частотная карта (выделяет изменения)",
         "download_freq_map": "Скачать частотную карту",
-        "full_report_label": "Скачать полный отчёт",
         "web_search_label": "Поиск в интернете",
         "web_search_header": "🌐 Результаты поиска в интернете",
         "no_treatment": "Рекомендации отсутствуют",
