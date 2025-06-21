@@ -11,7 +11,8 @@ def web_search(query, max_results=5):
                     "title": r["title"],
                     "description": r["body"],
                     "url": r["href"]
-                } for r in results if r.get("body") and r.get("href")
+                } for r in results if r["body"] and r["href"]
             ]
     except Exception as e:
-        return [{"error": f"❌ Ошибка при поиске: {str(e)}"}]
+        st.error(f"Internet qidiruvida xato: {str(e)}")
+        return [{"error": f"Internet qidiruvida xato: {str(e)}"}]
