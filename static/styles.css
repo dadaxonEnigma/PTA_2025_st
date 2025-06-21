@@ -1,18 +1,30 @@
-/* static/styles.css */
-body {
-    font-family: 'Arial', sans-serif;
+/* Основные стили остаются прежними */
+
+/* NEW: Стили для достижений */
+.stSuccess {
+    background-color: #e8f5e9;
+    border-left: 5px solid #4caf50;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 5px 5px 0;
 }
 
-h1, h2, h3 {
-    color: #2e7d32;
+/* NEW: Стили для календаря */
+.stSelectbox > div > div {
+    margin-bottom: 0.5rem;
 }
 
-.stButton>button {
-    background-color: #4caf50;
-    color: white;
+/* NEW: Стили для сравнения изображений */
+.stImage > img {
+    transition: transform 0.3s;
+}
+.stImage > img:hover {
+    transform: scale(1.03);
+}
+
+.disease-card {
+    border: 1px solid #ddd;
+    padding: 10px;
     border-radius: 5px;
-}
-
-.stButton>button:hover {
-    background-color: #388e3c;
+    margin-bottom: 10px;
 }
