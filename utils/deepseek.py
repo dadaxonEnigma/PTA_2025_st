@@ -1,6 +1,8 @@
 import json
 import requests
 import streamlit as st
+import re
+
 
 def query_deepseek(message, api_key, context=None):
     url = "https://openrouter.ai/api/v1/chat/completions"
@@ -38,9 +40,16 @@ def query_deepseek(message, api_key, context=None):
     except Exception as e:
         return f"Xato: API bilan bog‘lanishda muammo: {str(e)}"
 
+
 def format_bot_response(text):
     text = text.strip()
     if text.lower().startswith("uzum"):
         text = "### 🟢 " + text
-    text = text.replace("1. ", "1. **").replace("2. ", "2. **").replace(": ", ":** ")
+
+    # Преобразуем главные пункты: 1. ..., 2. ...
+    def bold_main_points(match):
+        return f"{match.group(1)} **{match.group(2)}**"
+
+    text = re.sub(r"(?m)^(\d+\.) (.+?):", bold_main_points, text)
+
     return text
