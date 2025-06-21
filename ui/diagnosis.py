@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 import io
-from websearch.search import web_search
+from web_search.search import web_search
 import config
 from models.visualization import plot_probabilities, get_heatmap, get_filtered_map
 
