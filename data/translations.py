@@ -1,7 +1,7 @@
 # data/translations.py
 translations = {
     "uz": {
-        "page_title": "🌿 Plant Disease Detector Pro",
+        "page_title": "🌿 Agro Scope",
         "file_uploader_label": "📷 O‘simlik bargi rasmini yuklang",
         "file_uploader_help": "Eng yaxshi natija uchun zararlangan bargni bir xil fonda suratga oling",
         "image_view_expander": "🔍 Rasmni ko‘rish",
@@ -71,7 +71,7 @@ Tavsiyalar:
         """
     },
     "en": {
-        "page_title": "🌿 Plant Disease Detector Pro",
+        "page_title": "🌿 Agro Scope",
         "file_uploader_label": "📷 Upload a plant leaf image",
         "file_uploader_help": "For best results, take a photo of the affected leaf against a plain background",
         "image_view_expander": "🔍 View Image",
@@ -141,7 +141,7 @@ Recommendations:
         """
     },
     "ru": {
-        "page_title": "🌿 Детектор болезней растений Pro",
+        "page_title": "🌿 Agro Scope",
         "file_uploader_label": "📷 Загрузите изображение листа растения",
         "file_uploader_help": "Для лучших результатов фотографируйте поражённый лист на однотонном фоне",
         "image_view_expander": "🔍 Просмотр изображения",
