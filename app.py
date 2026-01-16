@@ -18,12 +18,13 @@ if not api_key:
     st.error("API ключ не найден.")
     st.stop()
 
+
 if 'location' not in st.session_state:
     st.session_state.location = {"lat": 41.3, "lon": 69.2}  # Пример для Ташкента
 
 # Инициализация языка и чата
 if 'language' not in st.session_state:
-    st.session_state.language = "uz"
+    st.session_state.language = "ru"
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'chat_context' not in st.session_state:  # NEW: Контекст чата
