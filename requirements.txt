@@ -1,13 +1,12 @@
 streamlit
 onnxruntime
-torch==2.2.2+cpu
-torchvision==0.17.2+cpu
---extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
 numpy
 pillow
 opencv-python-headless>=4.5.0
 scipy
 matplotlib
 grad-cam
-ddgs
+duckduckgo_search
 python-weather
