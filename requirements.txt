@@ -10,3 +10,4 @@ matplotlib
 grad-cam
 duckduckgo_search
 python-weather
+duckduckgo_search
