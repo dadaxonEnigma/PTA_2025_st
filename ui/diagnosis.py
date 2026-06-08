@@ -111,16 +111,18 @@ def render_weather_risk(pred_class, get_text):
 
     temp, humidity, location_name = weather_data
     disease_name = config.format_class_name(pred_class, st.session_state.language)
+    threshold = config.DISEASE_HUMIDITY_THRESHOLD.get(pred_class, config.DEFAULT_HUMIDITY_THRESHOLD)
 
     if location_name:
         st.write(f"{get_text('weather_location')}: {location_name}")
     st.write(f"{get_text('weather_temp')}: {temp}°C")
     st.write(f"{get_text('weather_humidity')}: {humidity}%")
 
-    risk_key = "weather_risk_high" if humidity > 80 else "weather_risk_low"
+    is_high_risk = humidity > threshold
+    risk_key = "weather_risk_high" if is_high_risk else "weather_risk_low"
     risk_text = get_text(risk_key).format(humidity=humidity, temp=temp, disease=disease_name)
 
-    if humidity > 80:
+    if is_high_risk:
         st.warning(risk_text)
     else:
         st.success(risk_text)
@@ -148,11 +150,13 @@ def render_forecast_risk(pred_class, probs, top_idx, get_text):
     day = next(d for d in forecast if d["date"] == selected_date)
     disease_name = config.format_class_name(pred_class, st.session_state.language)
     confidence = probs[top_idx[0]] * 100
+    threshold = config.DISEASE_HUMIDITY_THRESHOLD.get(pred_class, config.DEFAULT_HUMIDITY_THRESHOLD)
 
     st.write(f"{get_text('weather_temp')}: {day['temp']}°C")
     st.write(f"{get_text('weather_humidity')}: {day['humidity']}%")
 
-    risk_key = "forecast_risk_high" if day["humidity"] > 80 else "forecast_risk_low"
+    is_high_risk = day["humidity"] > threshold
+    risk_key = "forecast_risk_high" if is_high_risk else "forecast_risk_low"
     risk_text = get_text(risk_key).format(
         date=selected_date,
         humidity=day["humidity"],
@@ -161,7 +165,7 @@ def render_forecast_risk(pred_class, probs, top_idx, get_text):
         confidence=f"{confidence:.1f}"
     )
 
-    if day["humidity"] > 80:
+    if is_high_risk:
         st.warning(risk_text)
     else:
         st.success(risk_text)

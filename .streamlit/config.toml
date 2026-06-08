@@ -2,6 +2,7 @@
 port = 8501
 enableCORS = false
 maxUploadSize = 100
+fileWatcherType = "none"
 
 [theme]
 base = "light"  

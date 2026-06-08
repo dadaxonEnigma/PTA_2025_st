@@ -10,6 +10,17 @@ LAYOUT = "centered"
 PAGE_ICON = "🌱"
 SIDEBAR_STATE = "expanded"
 
+# Порог влажности (%), выше которого условия считаются благоприятными
+# для распространения конкретной болезни (у разных грибковых/бактериальных
+# заболеваний разная чувствительность к влажности воздуха)
+DISEASE_HUMIDITY_THRESHOLD = {
+    "Apple___Black_rot": 75,
+    "Corn_(maize)___Northern_Leaf_Blight": 70,
+    "Grape___Black_rot": 75,
+    "Potato___Early_blight": 65,
+}
+DEFAULT_HUMIDITY_THRESHOLD = 80
+
 # Ссылки на образцы изображений
 SAMPLE_IMAGES = [
     "https://gardenerspath.com/wp-content/uploads/2021/03/Frogeye-Leaf-Spot-aka-Black-Rot-Botryosphaeria-on-Apple-Tree.jpg",
