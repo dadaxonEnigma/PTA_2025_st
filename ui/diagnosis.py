@@ -3,6 +3,7 @@ import io
 
 from data.translations import class_name_translations
 from web_search.search import web_search
+from utils.weather import get_weather, get_forecast
 import config
 from models.visualization import (
     plot_probabilities,
@@ -84,9 +85,86 @@ def render_diagnosis(img, session, model, classes, treatment, get_text, config):
                 f"{treatment[pred_class]['prevention']}"
             )
 
+        render_weather_risk(pred_class, get_text)
+        render_forecast_risk(pred_class, probs, top_idx, get_text)
+
     render_visualizations(img, model, probs, top_idx, classes, get_text)
 
     return pred_class, probs, top_idx
+
+
+# =========================================================
+# ПОГОДА И РИСК РАСПРОСТРАНЕНИЯ БОЛЕЗНИ
+# =========================================================
+
+def render_weather_risk(pred_class, get_text):
+    st.markdown(f"### {get_text('weather_risk_header')}")
+
+    weather_data = get_weather(
+        st.session_state.location["lat"],
+        st.session_state.location["lon"]
+    )
+
+    if not weather_data:
+        st.info(get_text("weather_unavailable"))
+        return
+
+    temp, humidity, location_name = weather_data
+    disease_name = config.format_class_name(pred_class, st.session_state.language)
+
+    if location_name:
+        st.write(f"{get_text('weather_location')}: {location_name}")
+    st.write(f"{get_text('weather_temp')}: {temp}°C")
+    st.write(f"{get_text('weather_humidity')}: {humidity}%")
+
+    risk_key = "weather_risk_high" if humidity > 80 else "weather_risk_low"
+    risk_text = get_text(risk_key).format(humidity=humidity, temp=temp, disease=disease_name)
+
+    if humidity > 80:
+        st.warning(risk_text)
+    else:
+        st.success(risk_text)
+
+
+def render_forecast_risk(pred_class, probs, top_idx, get_text):
+    st.markdown(f"### {get_text('forecast_header')}")
+
+    forecast = get_forecast(
+        st.session_state.location["lat"],
+        st.session_state.location["lon"]
+    )
+
+    if not forecast:
+        st.info(get_text("weather_unavailable"))
+        return
+
+    dates = [day["date"] for day in forecast]
+    selected_date = st.selectbox(
+        get_text("forecast_select_date"),
+        dates,
+        key="forecast_date"
+    )
+
+    day = next(d for d in forecast if d["date"] == selected_date)
+    disease_name = config.format_class_name(pred_class, st.session_state.language)
+    confidence = probs[top_idx[0]] * 100
+
+    st.write(f"{get_text('weather_temp')}: {day['temp']}°C")
+    st.write(f"{get_text('weather_humidity')}: {day['humidity']}%")
+
+    risk_key = "forecast_risk_high" if day["humidity"] > 80 else "forecast_risk_low"
+    risk_text = get_text(risk_key).format(
+        date=selected_date,
+        humidity=day["humidity"],
+        temp=day["temp"],
+        disease=disease_name,
+        confidence=f"{confidence:.1f}"
+    )
+
+    if day["humidity"] > 80:
+        st.warning(risk_text)
+    else:
+        st.success(risk_text)
 
 
 # =========================================================

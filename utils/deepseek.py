@@ -24,7 +24,7 @@ def query_deepseek(message, api_key, context=None):
         system_prompt += f"\nKontekst: {context}"
 
     payload = {
-        "model": "deepseek/deepseek-r1-0528:free",
+        "model": "openai/gpt-oss-120b:free",
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": message}

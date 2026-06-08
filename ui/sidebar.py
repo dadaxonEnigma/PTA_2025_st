@@ -20,12 +20,14 @@ def render_sidebar(get_text, get_weather, treatment):
     # Блок с погодой
     with st.expander("🌤️ " + get_text("weather_advice_expander")):
         if st.button(get_text("get_weather_btn")):
-            temp_humidity = get_weather(
+            weather_data = get_weather(
                 st.session_state.location["lat"],
                 st.session_state.location["lon"]
             )
-            if temp_humidity:
-                temp, humidity = temp_humidity
+            if weather_data:
+                temp, humidity, location_name = weather_data
+                if location_name:
+                    st.write(f"{get_text('weather_location')}: {location_name}")
                 st.write(f"{get_text('temperature')}: {temp}°C\n{get_text('humidity')}: {humidity}%")
                 risk = get_text("high_risk") if humidity > 80 else get_text("low_risk")
                 st.write(f"{get_text('disease_risk')}: {risk}")
