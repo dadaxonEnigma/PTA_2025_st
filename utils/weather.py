@@ -22,6 +22,27 @@ def get_weather(lat, lon):
         return None
 
 
+def geocode_city(city_name):
+    api_key = st.secrets.get("OPENWEATHER_API")
+    if not api_key:
+        return None
+    url = (
+        f"https://api.openweathermap.org/geo/1.0/direct?"
+        f"q={city_name}&limit=1&appid={api_key}"
+    )
+    try:
+        results = requests.get(url).json()
+        if not results:
+            return None
+        place = results[0]
+        country = place.get("country", "")
+        location_name = f"{place['name']}, {country}" if country else place["name"]
+        return {"lat": place["lat"], "lon": place["lon"], "name": location_name}
+    except Exception as e:
+        print("❌ Ошибка при определении координат города:", e)
+        return None
+
+
 def get_forecast(lat, lon):
     api_key = st.secrets.get("OPENWEATHER_API")
     if not api_key:

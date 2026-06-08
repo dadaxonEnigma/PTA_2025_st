@@ -1,5 +1,6 @@
 import streamlit as st
 from data.translations import sidebar_content
+from utils.weather import geocode_city
 
 def render_sidebar(get_text, get_weather, treatment):
     st.header(get_text("sidebar_tools"))
@@ -19,6 +20,17 @@ def render_sidebar(get_text, get_weather, treatment):
 
     # Блок с погодой
     with st.expander("🌤️ " + get_text("weather_advice_expander")):
+        # Выбор местоположения пользователя
+        city_input = st.text_input(get_text("city_input_label"), key="city_input")
+        if st.button(get_text("set_location_btn")):
+            if city_input.strip():
+                place = geocode_city(city_input.strip())
+                if place:
+                    st.session_state.location = {"lat": place["lat"], "lon": place["lon"]}
+                    st.success(f"{get_text('location_set_success')}: {place['name']}")
+                else:
+                    st.error(get_text("location_not_found"))
+
         if st.button(get_text("get_weather_btn")):
             weather_data = get_weather(
                 st.session_state.location["lat"],
